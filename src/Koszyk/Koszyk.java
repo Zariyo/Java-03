@@ -43,11 +43,7 @@ public class Koszyk {
     public double cartPrice(){
         final double[] cena = {0};
 
-        for (int j=0;j<listaKuponow.size(); j++){
-            if(listaKuponow.get(j).isAppliable(this)){
-                listaKuponow.get(j).apply(this);
-            }
-        }
+        applyCoupons();
 
         shoppingList.forEach(Produkt -> {
             cena[0] = cena[0] + Produkt.getDiscountPrice();});
@@ -57,6 +53,14 @@ public class Koszyk {
 
     public void addCoupon(Kupon kupon){
         listaKuponow.add(kupon);
+    }
+
+    public void applyCoupons(){
+        for (Kupon kupon : listaKuponow) {
+            if (kupon.isAppliable(this)) {
+                kupon.apply(this);
+            }
+        }
     }
 
     public Produkt getCheapest(){
@@ -95,10 +99,9 @@ public class Koszyk {
     }
 
     public List<Produkt> getProductsList(){
-        List<Produkt> list = shoppingList
+        return shoppingList
                 .stream()
                 .sorted(Comparator.comparing(Produkt::getName))
                 .toList();
-        return list;
     }
 }

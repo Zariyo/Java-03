@@ -1,7 +1,6 @@
 package Kupony;
 
 import Koszyk.Koszyk;
-import Produkt.Produkt;
 
 import java.util.ArrayList;
 import java.util.Objects;
@@ -20,10 +19,8 @@ public class Kupon_Kakao_50_percent implements Kupon{
 
     @Override
     public boolean isAppliable(Koszyk koszyk) {
-        ArrayList<String> lista = new ArrayList<String>();
-        koszyk.getProductsList().forEach(Produkt -> {
-            lista.add(Produkt.getName());
-        });
+        ArrayList<String> lista = new ArrayList<>();
+        koszyk.getProductsList().forEach(Produkt -> lista.add(Produkt.getName()));
         return lista.contains("Kakao");
     }
 

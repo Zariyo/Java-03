@@ -62,6 +62,7 @@ public class Koszyk {
                 kupon.apply(this);
             }
         }
+        couponList.clear();
     }
 
     public Produkt getCheapest(){
